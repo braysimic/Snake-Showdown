@@ -2,9 +2,12 @@ package model;
 
 import java.util.ArrayList;
 
+import model.observerPattern.SnakeEvent;
+import model.observerPattern.SnakeObserver;
+import model.observerPattern.Subject;
 import view.AppWindow;
 
-public class Snake {
+public class Snake implements Subject{
 	
 	public ArrayList<SnakeNode> nodes =  new ArrayList<>();
 
@@ -12,6 +15,8 @@ public class Snake {
 	private final int INIT_YLOC = AppWindow.GRID_SIZE * 3;
 	private final int INIT_NODES = 6;
 	private Direction direction;
+
+	private ArrayList<SnakeObserver> observers = new ArrayList<>();
 
 	public Snake() {
 		init();
@@ -46,6 +51,35 @@ public class Snake {
 			case DOWN:
 				head.y += AppWindow.GRID_SIZE;
 				break;
+		}
+	}
+
+	@Override
+	public void addObserver(SnakeObserver o) {
+		observers.add(o);
+	}
+
+	@Override
+	public void removeObsever(SnakeObserver o) {
+		observers.remove(o);
+	}
+
+	@Override
+	public void notifyObsever(SnakeEvent e) {
+		switch(e) {
+			case HIT_FOOD:
+				for(var o: observers)
+					o.hitFood();
+				break;
+			case HIT_SELF:
+				for(var o: observers)
+					o.hitSelf();
+				break;
+			case HIT_WALL:
+				for(var o: observers)
+					o.hitWall();
+				break;
+			
 		}
 	}
 }

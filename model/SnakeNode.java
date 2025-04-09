@@ -6,7 +6,7 @@ public class SnakeNode {
 	public int y;
 
 	public SnakeNode(int x, int y) {
-		this.y = y;
 		this.x = x;
+		this.y = y;
 	}
 }

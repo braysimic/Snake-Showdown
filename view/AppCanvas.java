@@ -34,7 +34,7 @@ public class AppCanvas extends JPanel{
 		drawSnake(g2, App.model.snake);
 		if(App.model.food != null)
 			drawFood(g2, App.model.food);
-		if(App.model.messages != null);
+		if(App.model.messages != null)
 			drawMessages(g2, App.model.messages);
 	}
 

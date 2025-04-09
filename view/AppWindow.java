@@ -7,6 +7,10 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import controller.ButtonPressListener;
+import view.statePattern.GameState;
+import view.statePattern.GameStateInit;
+
 public class AppWindow extends JFrame{
 
 	private AppCanvas canvas;
@@ -20,6 +24,8 @@ public class AppWindow extends JFrame{
 	public static final String PAUSE_ACTION = "Pause";
 	public static final String RESTART_ACTION = "App Restart";
 	public static final String EXIT_ACTION = "Exit";
+
+	private GameState gameState;
 	
 	public void init() {
 		Container cp = getContentPane();
@@ -34,5 +40,28 @@ public class AppWindow extends JFrame{
 		southPanel.add(restartButton);
 		southPanel.add(exitButton);
 		cp.add(BorderLayout.SOUTH, southPanel);
+
+		ButtonPressListener buttonPressListener = new ButtonPressListener();
+		startPauseButton.addActionListener(buttonPressListener);
+		restartButton.addActionListener(buttonPressListener);
+		exitButton.addActionListener(buttonPressListener);
+
+		gameState = new GameStateInit();
+	}
+
+	public void goNextState() {
+		gameState.goNext(this);
+	}
+
+	public GameState getGameState() {
+		return gameState;
+	}
+
+	public void setGameState(GameState gameState) {
+		this.gameState = gameState;
+	}
+
+	public AppCanvas getCanvas() {
+		return canvas;
 	}
 }

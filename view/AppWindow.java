@@ -8,6 +8,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import controller.ButtonPressListener;
+import controller.KeyPressListener;
 import view.statePattern.GameState;
 import view.statePattern.GameStateInit;
 
@@ -45,6 +46,15 @@ public class AppWindow extends JFrame{
 		startPauseButton.addActionListener(buttonPressListener);
 		restartButton.addActionListener(buttonPressListener);
 		exitButton.addActionListener(buttonPressListener);
+		
+		KeyPressListener keyPressListener = new KeyPressListener();
+		canvas.addKeyListener(keyPressListener);
+		canvas.requestFocusInWindow();
+		canvas.setFocusable(true);
+
+		startPauseButton.setFocusable(false);
+		restartButton.setFocusable(false);
+		exitButton.setFocusable(false);
 
 		gameState = new GameStateInit();
 	}

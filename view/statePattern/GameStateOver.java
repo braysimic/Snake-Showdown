@@ -6,8 +6,8 @@ import view.AppWindow;
 public class GameStateOver implements GameState{
 
 	public GameStateOver() {
-		App.win.restartButton.setEnabled(false);
-		App.win.startPauseButton.setEnabled(true);
+		App.win.restartButton.setEnabled(true);
+		App.win.startPauseButton.setEnabled(false);
 	}
 
 	@Override
@@ -17,6 +17,7 @@ public class GameStateOver implements GameState{
 
 	@Override
 	public void animate() {
+		App.model.snake.falling();
 		
 	}
 	

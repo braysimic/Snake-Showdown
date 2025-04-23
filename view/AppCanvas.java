@@ -24,6 +24,16 @@ public class AppCanvas extends JPanel{
 		setPreferredSize(new Dimension(WIDTH, HEIGHT));
 		setBackground(Color.black);
 	}
+
+	public Snake getSnake() {
+		return App.model.snake;
+	}
+
+	public void startGame() {
+		App.model.reset();
+		repaint();
+	}
+
 	
 	@Override
 	public void paintComponent(Graphics g) {
@@ -77,4 +87,5 @@ public class AppCanvas extends JPanel{
 		g2.setFont(new Font("Courier New", Font.PLAIN, 28));
 		g2.drawString(messages, 50, 140);
 	}
+
 }

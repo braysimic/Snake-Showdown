@@ -3,6 +3,8 @@ package model;
 import java.util.Random;
 
 import controller.App;
+import model.strategyPattern.ClassicStrategy;
+import model.strategyPattern.PlayStrategy;
 import view.AppCanvas;
 import view.AppWindow;
 
@@ -13,9 +15,22 @@ public class GameModel {
 	public String messages;
 	public int score;
 
+	private PlayStrategy playStrategy;
+
 	public GameModel() {
 		snake = new Snake();
+		setPlayStrategy(new ClassicStrategy());
 		init();
+	}
+
+	public void setPlayStrategy(PlayStrategy strategy) {
+		this.playStrategy = strategy;
+	}
+
+	public void playMove() {
+		if(playStrategy != null) {
+			playStrategy.move();
+		}
 	}
 
 	public void init() {
@@ -62,5 +77,9 @@ public class GameModel {
 			if(head.x == n.x && head.y == n.y) return true;
 		}
 		return false;
+	}
+
+	public void reset() {
+		init();
 	}
 }
